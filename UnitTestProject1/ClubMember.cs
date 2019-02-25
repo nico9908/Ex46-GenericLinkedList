@@ -7,13 +7,18 @@ using System.Threading.Tasks;
 namespace UnitTestProject1
 {
     public enum Gender { Male, Female };
-    public class ClubMember
+    public class ClubMember : IComparable<ClubMember>
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Gender Gender { get; set; }
         public int Age { get; set; }
+
+        public int CompareTo(ClubMember other)
+        {
+            return FirstName.CompareTo(other.FirstName);
+        }
 
         public override string ToString()
         {

@@ -261,6 +261,24 @@ namespace UnitTestProject1
                 Assert.AreEqual(list.ItemAt(j++), e.Current);
             }
         }
+        [TestMethod]
+        public void TestClubMemberCompareTo()
+        {
+            ClubMember cm1, cm2, cm3, cm4;
+            cm1 = new ClubMember();
+            cm2 = new ClubMember();
+            cm3 = new ClubMember();
+            cm4 = new ClubMember();
+            cm1.FirstName = "A";
+            cm2.FirstName = "B";
+            cm3.FirstName = "C";
+            cm4.FirstName = "C";
+
+            Assert.IsTrue(cm1.CompareTo(cm2) < 0);
+            Assert.IsTrue(cm3.CompareTo(cm2) > 0);
+            Assert.IsTrue(cm2.CompareTo(cm3) < 0);
+            Assert.AreEqual(cm3.CompareTo(cm4), 0);
+        }
 
     }
 }
