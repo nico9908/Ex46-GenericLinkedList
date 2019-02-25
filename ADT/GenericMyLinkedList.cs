@@ -143,7 +143,8 @@ namespace ADT
         private class MyLinkedListEnumerator : IEnumerator
         {
             private Node _head;
-            
+            private T _currentT;
+            private Node _currentNode;
 
             public MyLinkedListEnumerator(Node head)
             {
@@ -153,7 +154,7 @@ namespace ADT
             {
                 get
                 {
-                    return Current;
+                    return _currentT;
                 }
             }
 
@@ -161,14 +162,32 @@ namespace ADT
 
             public bool MoveNext()
             {
-                if (MoveNext = Current)
+                if (_head == null) //no list at all
                 {
-                    return Current.Next;
+                    return false;
                 }
+                else if (_currentNode == null) //not started yet
+                {
+                    _currentNode = _head;
+                    _currentT = _currentNode.Data;
+                }
+                else if (_currentNode.Next == null) // at end of list
+                {
+                    _currentNode = null;
+                    _currentT = default(T);
+                    return false;
+                }
+                else // get to next node
+                {
+                    _currentNode = _currentNode.Next;
+                    _currentT = _currentNode.Data;
+                }
+                return true;
             }
             public void Reset()
             {
-                Current = default(T);
+                _currentNode = null;
+                _currentT = default(T);
             }
         }
 
